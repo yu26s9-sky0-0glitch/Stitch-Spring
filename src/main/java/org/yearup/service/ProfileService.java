@@ -18,4 +18,23 @@ public class ProfileService
     {
         return profileRepository.save(profile);
     }
+    public Profile getById(int id){
+        return profileRepository.findById(id).orElse(null);
+    }
+    public Profile update(int id, Profile updatedProfile){
+        Profile existingProfile = profileRepository.findById(id).orElse(null);
+        if (existingProfile != null) {
+            existingProfile.setFirstName(updatedProfile.getFirstName());
+            existingProfile.setLastName(updatedProfile.getLastName());
+            existingProfile.setPhone(updatedProfile.getPhone());
+            existingProfile.setEmail(updatedProfile.getEmail());
+            existingProfile.setAddress(updatedProfile.getAddress());
+            existingProfile.setCity(updatedProfile.getCity());
+            existingProfile.setState(updatedProfile.getState());
+            existingProfile.setZip(updatedProfile.getZip());
+            return profileRepository.save(existingProfile);
+        }
+
+        return null;
+    }
 }
